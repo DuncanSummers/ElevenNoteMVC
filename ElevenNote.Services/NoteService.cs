@@ -64,5 +64,22 @@ namespace ElevenNote.Services
                 return new NoteDetail { NoteID = entity.NoteID, Title = entity.Title, Content = entity.Content, CreatedUTC = entity.CreatedUTC, ModifiedUTC = entity.ModifiedUTC };
             }
         }
+
+        public bool UpdateNote(NoteEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Notes
+                        .Single(e => e.NoteID == model.NoteID && e.OwnerID == _userId);
+
+                entity.Title = model.Title;
+                entity.Content = model.Content;
+                entity.ModifiedUTC = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
