@@ -67,7 +67,7 @@
         $(document).ready(function () {
             $("i[data-toggle='star']")
                 .css({ "cursor": "pointer" })
-                .click(funtion(e) {
+                .click(function (e) {
                     var target = $(e.target);
                     var noteId = target.attr("data-id");
                     var starSet = target.hasClass("glyphicon-star");
